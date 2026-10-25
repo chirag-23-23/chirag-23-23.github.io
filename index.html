@@ -1,0 +1,223 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Chirag Vinayak, electronics and software</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,500;12..96,700&family=IBM+Plex+Sans:wght@400;500&display=swap" rel="stylesheet">
+<style>
+:root{--bg:#f6f7f9;--ink:#14171c;--mute:#5b6472;--line:#dfe3e8;--acc:#2457ff;--panel:#eceff3;
+box-sizing:border-box;padding-top:env(safe-area-inset-top,0px);padding-bottom:env(safe-area-inset-bottom,0px);color-scheme:light}
+@media (prefers-color-scheme:dark){:root:not([data-theme="light"]){--bg:#0f1217;--ink:#e8ebf0;--mute:#9aa4b2;--line:#252b34;--acc:#7da2ff;--panel:#171c23;color-scheme:dark}}
+:root[data-theme="dark"]{--bg:#0f1217;--ink:#e8ebf0;--mute:#9aa4b2;--line:#252b34;--acc:#7da2ff;--panel:#171c23;color-scheme:dark}
+*,*::before,*::after{box-sizing:inherit}
+html{scroll-behavior:smooth;scroll-padding-top:calc(env(safe-area-inset-top,0px) + 64px)}
+body{margin:0;background:var(--bg);color:var(--ink);font:400 17px/1.65 "IBM Plex Sans",system-ui,sans-serif;-webkit-font-smoothing:antialiased}
+body::before{content:"";position:fixed;inset:0 0 auto;height:env(safe-area-inset-top,0px);background:var(--bg);z-index:10}
+a{color:inherit}
+:focus-visible{outline:2px solid var(--acc);outline-offset:3px;border-radius:3px}
+header{position:sticky;top:env(safe-area-inset-top,0px);z-index:9;background:var(--bg);border-bottom:1px solid var(--line)}
+.bar{max-width:760px;margin:0 auto;padding:14px 24px;display:flex;align-items:center;gap:20px}
+.bar b{font-family:"Bricolage Grotesque",sans-serif;font-weight:700;font-size:18px;margin-right:auto;text-decoration:none}
+nav{display:flex;gap:18px;font-size:15px}
+nav a{text-decoration:none;color:var(--mute);padding:2px 0;border-bottom:2px solid transparent;transition:color .2s,border-color .2s}
+nav a:hover,nav a.on{color:var(--ink);border-color:var(--acc)}
+#theme{background:none;border:1px solid var(--line);color:var(--ink);width:34px;height:34px;border-radius:50%;cursor:pointer;font-size:15px}
+#theme:hover{border-color:var(--acc)}
+main{max-width:760px;margin:0 auto;padding:0 24px 80px}
+section{padding-top:72px}
+h1,h2,h3{font-family:"Bricolage Grotesque",sans-serif;line-height:1.15;margin:0}
+h1{font-size:clamp(40px,8vw,68px);font-weight:700;letter-spacing:-.02em}
+h2{font-size:28px;font-weight:700;margin-bottom:24px}
+h3{font-size:19px;font-weight:500}
+.lead{font-size:20px;max-width:34em;margin:18px 0 0}
+.sub{color:var(--mute);margin:10px 0 0}
+#wave{display:block;width:100%;height:96px;margin:36px 0 6px;cursor:crosshair}
+.hint{font-size:14px;color:var(--mute);margin:0}
+.btns{display:flex;flex-wrap:wrap;gap:12px;margin-top:28px}
+.btn{font:500 15px "IBM Plex Sans",sans-serif;padding:10px 18px;border-radius:999px;border:1px solid var(--ink);background:var(--ink);color:var(--bg);cursor:pointer;text-decoration:none}
+.btn.alt{background:none;color:var(--ink);border-color:var(--line)}
+.btn:hover{border-color:var(--acc)}
+.facts{display:grid;grid-template-columns:repeat(auto-fit,minmax(150px,1fr));gap:0;margin-top:28px;border-top:1px solid var(--line)}
+.facts div{padding:14px 16px 14px 0}
+.facts b{display:block;font:700 26px "Bricolage Grotesque",sans-serif}
+.facts span{font-size:14px;color:var(--mute)}
+.tl{border-left:1px solid var(--line);margin-left:6px}
+.job{position:relative;padding:0 0 30px 26px}
+.job::before{content:"";position:absolute;left:-5px;top:9px;width:9px;height:9px;border-radius:50%;background:var(--bg);border:2px solid var(--acc)}
+.job .when{font-size:14px;color:var(--mute);margin:2px 0 6px}
+.job p{margin:4px 0 0}
+.chips{display:flex;flex-wrap:wrap;gap:8px;margin:0 0 18px}
+.chips button{font:500 14px "IBM Plex Sans",sans-serif;background:none;border:1px solid var(--line);color:var(--mute);padding:5px 14px;border-radius:999px;cursor:pointer}
+.chips button[aria-pressed="true"]{background:var(--ink);color:var(--bg);border-color:var(--ink)}
+.proj{border-top:1px solid var(--line)}
+.proj:last-child{border-bottom:1px solid var(--line)}
+.proj[hidden]{display:none}
+.ph{width:100%;display:flex;align-items:baseline;gap:14px;background:none;border:0;color:inherit;text-align:left;padding:18px 0;cursor:pointer;font:inherit}
+.ph h3{margin-right:auto}
+.ph .tag{font-size:14px;color:var(--mute)}
+.ph .pm{font:500 22px "IBM Plex Sans";color:var(--acc);width:18px;text-align:center;transition:transform .25s}
+.ph[aria-expanded="true"] .pm{transform:rotate(45deg)}
+.pb{display:grid;grid-template-rows:0fr;transition:grid-template-rows .3s ease}
+.ph[aria-expanded="true"]+.pb{grid-template-rows:1fr}
+.pb>div{overflow:hidden}
+.pb p{margin:0 0 10px;max-width:38em}
+.pb .stack{font-size:14px;color:var(--mute);margin:0 0 20px}
+.live{display:inline-block;font-size:13px;color:var(--acc);border:1px solid var(--acc);border-radius:999px;padding:1px 10px;margin-left:8px;vertical-align:2px}
+.sk{display:grid;grid-template-columns:150px 1fr;gap:10px 20px;margin:0}
+.sk dt{font-weight:500}.sk dd{margin:0;color:var(--mute)}
+.edu p{margin:0 0 14px}
+.edu small{display:block;color:var(--mute);font-size:14px}
+#mail{font-family:"Bricolage Grotesque",sans-serif;font-size:clamp(22px,5vw,32px);font-weight:500;background:none;border:0;color:var(--ink);padding:0;cursor:copy;border-bottom:2px solid var(--acc)}
+.links{display:flex;gap:22px;margin-top:22px}
+footer{max-width:760px;margin:0 auto;padding:0 24px 40px;color:var(--mute);font-size:14px}
+@media (max-width:620px){nav{display:none}.sk{grid-template-columns:1fr;gap:2px}.sk dd{margin-bottom:12px}}
+@media (prefers-reduced-motion:reduce){html{scroll-behavior:auto}*{transition:none!important}}
+</style>
+</head>
+<body>
+<header><div class="bar">
+<b>Chirag Vinayak</b>
+<nav aria-label="Sections"><a href="#work">Work</a><a href="#projects">Projects</a><a href="#skills">Skills</a><a href="#education">Education</a><a href="#contact">Contact</a></nav>
+<button id="theme" aria-label="Switch between light and dark theme">◐</button>
+</div></header>
+<main>
+<section id="top" style="padding-top:64px">
+<h1>Hi, I’m Chirag. I build things that sense, decide and report back.</h1>
+<p class="lead">I’m a final-year Electronics and Computer Engineering student at Thapar Institute. I work on low-power analog design, embedded sensing and data dashboards, and I enjoy turning messy readings into something people can use.</p>
+<canvas id="wave" aria-label="A sine wave that changes with your pointer" role="img"></canvas>
+<p class="hint">Move your pointer across the wave to change its frequency.</p>
+<div class="btns"><a class="btn" href="#projects">See projects</a><button class="btn alt" id="copy">Copy my email</button></div>
+<div class="facts">
+<div><b>8.41</b><span>CGPA at Thapar</span></div>
+<div><b>92%</b><span>power cut in a Montra circuit design</span></div>
+<div><b>500+</b><span>participants at Virasat, a festival I helped run</span></div>
+</div>
+</section>
+
+<section id="work">
+<h2>Experience</h2>
+<div class="tl">
+<div class="job"><h3>Analog RF Design Intern, Semiconductor Laboratory (SCL), Mohali</h3><p class="when">June to July 2026</p><p>Took a single-stage CMOS operational amplifier from schematic to layout in Cadence Virtuoso, checking it with DC, AC and transient simulation and DRC, LVS and PEX. Also analysed CMOS building blocks for gain, bandwidth, linearity and power trade-offs.</p></div>
+<div class="job"><h3>General Secretary, SPICMACAY Society, Thapar</h3><p class="when">December 2025 to present</p><p>Onboard and coordinate vendors and performing artists for institute events, and run SOPs for logistics. Led on-ground delivery of Virasat, a three-day festival for 500+ participants.</p></div>
+<div class="job"><h3>Operations Manager and Electronics Head, GeoThermX</h3><p class="when">September 2025 to present</p><p>Lead the electronics and sensing side of a geothermal HVAC startup project, using field data to decide the best piping depth. Also reach out to 15 to 20 colleges and hotels for energy-survey proposals.</p></div>
+<div class="job"><h3>R&amp;D Intern, Montra Electric Truck, Manesar</h3><p class="when">June to August 2025</p><p>Designed an ultra-low-power analog temperature alert circuit under 10 µA average current, cutting system power use by about 92% through optimisation and power-gating. Studied DFMEA and SOPs for automotive electronics testing.</p></div>
+<div class="job"><h3>Head of Finance, SPICMACAY Society, Thapar</h3><p class="when">September 2024 to December 2025</p><p>Managed a ₹2.5 lakh budget and tracked spending across 10+ institute events.</p></div>
+</div>
+</section>
+
+<section id="projects">
+<h2>Projects</h2>
+<div class="chips" role="group" aria-label="Filter projects">
+<button aria-pressed="true" data-f="all">All</button><button aria-pressed="false" data-f="hardware">Hardware</button><button aria-pressed="false" data-f="software">Software</button><button aria-pressed="false" data-f="data">Data</button>
+</div>
+<div class="proj" data-t="hardware software">
+<button class="ph" aria-expanded="false"><h3>Smart parking and vehicle authorization<span class="live">ongoing</span></h3><span class="tag">Hardware, software</span><span class="pm" aria-hidden="true">+</span></button>
+<div class="pb"><div>
+<p>A campus system that reads a vehicle’s number plate at the gate, checks it against authorization records and logs the decision. An overhead camera on a Raspberry Pi 4 finds free parking slots with YOLOv8 Nano.</p>
+<p>Four user groups (admin, guard, faculty and students, visitors) get their own views, with time-limited QR permits for visitors, flagged vehicles and audit logs. I’m still building it: the custom gate-unit PCB is in development, and full hardware integration and end-to-end testing are still to come.</p>
+<p class="stack">Python, Django, MySQL, EasyOCR, YOLOv8, ESP32-CAM, Raspberry Pi 4</p>
+</div></div></div>
+<div class="proj" data-t="hardware data">
+<button class="ph" aria-expanded="false"><h3>Geothermal heating and cooling sensing system</h3><span class="tag">Hardware, data</span><span class="pm" aria-hidden="true">+</span></button>
+<div class="pb"><div>
+<p>I designed the PCB and built a multi-depth temperature sensing prototype to see how heat behaves underground.</p>
+<p>Two months of readings, analysed in Power BI, showed how temperature changes with depth and helped decide the piping depth.</p>
+<p class="stack">ESP32, MAX31865, PT100, PCB design, Power BI</p>
+</div></div></div>
+<div class="proj" data-t="data">
+<button class="ph" aria-expanded="false"><h3>NIFTY 50 market analytics dashboard</h3><span class="tag">Data</span><span class="pm" aria-hidden="true">+</span></button>
+<div class="pb"><div>
+<p>A three-page Power BI dashboard on five years of data for 20 NIFTY 50 companies. Python and yFinance automate the data pull and cleaning.</p>
+<p>A data model with a date table and DAX measures tracks returns, moving averages, volatility, drawdown and 52-week highs and lows. Slicers let you compare stocks and sectors.</p>
+<p class="stack">Power BI, Python, Pandas, DAX, SQL</p>
+</div></div></div>
+<div class="proj" data-t="hardware">
+<button class="ph" aria-expanded="false"><h3>5-stage pipelined RV32I processor</h3><span class="tag">Hardware</span><span class="pm" aria-hidden="true">+</span></button>
+<div class="pb"><div>
+<p>A 32-bit RV32I processor in Verilog with data forwarding, load-use hazard detection and branch flushing.</p>
+<p>I wrote directed testbenches and verification notes for the ALU, forwarding logic, memory access and hazard handling.</p>
+<p class="stack">Verilog, Icarus Verilog, GTKWave</p>
+</div></div></div>
+<div class="proj" data-t="hardware">
+<button class="ph" aria-expanded="false"><h3>Ultra-low-power temperature alert and battery monitor</h3><span class="tag">Hardware</span><span class="pm" aria-hidden="true">+</span></button>
+<div class="pb"><div>
+<p>A fully analog temperature monitor that runs on a 3 V coin cell with three programmable thresholds, built from transistors and TLC555 timers. It draws under 10 µA on average.</p>
+<p>I simulated and verified the design in NI Multisim and brought the bill of materials down by about 15%.</p>
+<p class="stack">NI Multisim, TLC555, analog design</p>
+</div></div></div>
+</section>
+
+<section id="skills">
+<h2>Skills</h2>
+<dl class="sk">
+<dt>Circuits and layout</dt><dd>Analog and CMOS design, low-power design, schematic and PCB design, Cadence Virtuoso, NI Multisim, LTSpice, DRC, LVS and PEX checks</dd>
+<dt>Embedded and digital</dt><dd>ESP32, sensor interfacing, Raspberry Pi, Verilog</dd>
+<dt>Data and code</dt><dd>Python (Pandas), SQL, Power BI (DAX, Power Query), Excel</dd>
+<dt>Ways of working</dt><dd>SOP writing, technical documentation, DFMEA, vendor and team coordination, budget tracking</dd>
+</dl>
+</section>
+
+<section id="education" class="edu">
+<h2>Education</h2>
+<p><b>B.Tech, Electronics and Computer Engineering</b>, Thapar Institute of Engineering and Technology, Patiala<small>August 2023 to May 2027 (expected), CGPA 8.41</small><small>Coursework: Digital Electronics, Computer Architecture, Embedded Systems</small><small>Programs: SAEV (Volvo) Smart and Autonomous Electric Vehicles, and the JSW MG CAEV certificate course</small></p>
+<p><b>Manav Rachna International School</b><small>Class XII, 94%. Class X, 95.2%</small></p>
+</section>
+
+<section id="contact">
+<h2>Say hello</h2>
+<p>I’m looking for internships and early roles in electronics, embedded systems and data. The quickest way to reach me is email.</p>
+<button id="mail" aria-label="Copy email address">chiragv2005@gmail.com</button>
+<span id="msg" class="hint" role="status" style="margin-left:12px"></span>
+<div class="links"><a href="https://www.linkedin.com/in/chirag-vinayak-b3b576317">LinkedIn</a><a href="https://github.com/chirag-23-23">GitHub</a><a href="mailto:chiragv2005@gmail.com">Write an email</a></div>
+</section>
+</main>
+<footer>Chirag Vinayak, Gurugram, India</footer>
+
+<script>
+(function(){
+var root=document.documentElement;
+var tb=document.getElementById('theme');
+function dark(){return root.dataset.theme?root.dataset.theme==='dark':matchMedia('(prefers-color-scheme: dark)').matches}
+tb.onclick=function(){root.dataset.theme=dark()?'light':'dark'};
+
+// nav highlight
+var links=[].slice.call(document.querySelectorAll('nav a'));
+var io=new IntersectionObserver(function(es){es.forEach(function(e){if(e.isIntersecting){links.forEach(function(l){l.classList.toggle('on',l.getAttribute('href')==='#'+e.target.id)})}})},{rootMargin:'-40% 0px -55% 0px'});
+document.querySelectorAll('main section[id]').forEach(function(s){io.observe(s)});
+
+// project accordion + filter
+document.querySelectorAll('.ph').forEach(function(b){b.onclick=function(){b.setAttribute('aria-expanded',b.getAttribute('aria-expanded')!=='true')}});
+var chips=[].slice.call(document.querySelectorAll('.chips button'));
+chips.forEach(function(c){c.onclick=function(){
+chips.forEach(function(o){o.setAttribute('aria-pressed',o===c)});
+document.querySelectorAll('.proj').forEach(function(p){p.hidden=!(c.dataset.f==='all'||p.dataset.t.split(' ').indexOf(c.dataset.f)>-1)})}});
+
+// copy email
+var msg=document.getElementById('msg'),mail='chiragv2005@gmail.com';
+function copy(){var done=function(){msg.textContent='Email copied.';setTimeout(function(){msg.textContent=''},2000)};
+if(navigator.clipboard){navigator.clipboard.writeText(mail).then(done,function(){msg.textContent=mail})}else{msg.textContent=mail}}
+document.getElementById('copy').onclick=function(){location.hash='contact';copy()};
+document.getElementById('mail').onclick=copy;
+
+// wave
+var cv=document.getElementById('wave'),cx=cv.getContext('2d'),W,H,f=2.5,tf=2.5,t=0,still=matchMedia('(prefers-reduced-motion: reduce)').matches;
+function size(){var r=cv.getBoundingClientRect(),d=window.devicePixelRatio||1;W=r.width;H=r.height;cv.width=W*d;cv.height=H*d;cx.setTransform(d,0,0,d,0,0)}
+function col(n){return getComputedStyle(root).getPropertyValue(n)}
+function draw(){
+cx.clearRect(0,0,W,H);
+cx.strokeStyle=col('--line');cx.lineWidth=1;cx.beginPath();cx.moveTo(0,H/2);cx.lineTo(W,H/2);cx.stroke();
+cx.strokeStyle=col('--acc');cx.lineWidth=2;cx.beginPath();
+for(var x=0;x<=W;x+=2){var y=H/2+Math.sin(x/W*f*Math.PI*2+t)*H*.36;x?cx.lineTo(x,y):cx.moveTo(x,y)}
+cx.stroke()}
+function loop(){f+=(tf-f)*.08;t+=.03;draw();requestAnimationFrame(loop)}
+cv.addEventListener('pointermove',function(e){var r=cv.getBoundingClientRect();tf=1+(e.clientX-r.left)/r.width*9;if(still)draw()});
+cv.addEventListener('pointerleave',function(){tf=2.5});
+addEventListener('resize',function(){size();draw()});
+size();if(still){draw()}else{loop()}
+})();
+</script>
+</body>
+</html>
